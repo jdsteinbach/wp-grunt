@@ -13,6 +13,12 @@ This Gruntfile doesn't care about:
 
 * Your local domain/url
 
+To start using this Gruntfile, navigate to your theme directory in Terminal and run the following commands:
+
+`npm install`
+
+`bower install`
+
 ## Tasks
 
 ### `grunt init`
