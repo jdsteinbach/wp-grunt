@@ -33,4 +33,4 @@ The `watch` task (also accessible through `grunt` and `grunt serve`) watches & c
 
 ### `grunt build`
 
-The `build` task creates a streamlined deployable version of the theme. In a folder called `deploy` (which it creates), it generates a copy of the theme (same folder name) containing only the necessary files needed for actual usage. All CSS & JS files are minified, images are optimized, and node/bower/Grunt/Sass stuff is left out.
+The `build` task creates a streamlined deployable version of the theme. In a folder called `deploy` (which it creates), it generates a copy of the theme (same folder name) containing only the necessary files needed for actual usage. All CSS & JS files are minified, images are optimized, and node/bower/Grunt/Sass stuff is left out. It also creates a `.zip` copy of the theme for easier upload / transfer.

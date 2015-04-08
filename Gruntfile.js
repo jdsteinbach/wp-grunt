@@ -195,6 +195,21 @@ module.exports = function(grunt) {
           }
         ]
       }
+    },
+
+    compress: {
+      main: {
+        options: {
+          archive: 'deploy/'+(__dirname.split('/').pop())+'.zip'
+        },
+        files: [
+          {
+            expand: true,
+            cwd: 'deploy/'+(__dirname.split('/').pop()),
+            src: '**/*.*'
+          }
+        ]
+      }
     }
   });
 
@@ -213,6 +228,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-phplint');
   grunt.loadNpmTasks('grunt-imageoptim');
   grunt.loadNpmTasks('grunt-svgmin');
+  grunt.loadNpmTasks('grunt-contrib-compress');
 
   grunt.registerTask('serve', function (target) {
     grunt.task.run([
