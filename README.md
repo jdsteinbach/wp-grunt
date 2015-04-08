@@ -23,7 +23,7 @@ To start using this Gruntfile, navigate to your theme directory in Terminal and 
 
 ### `grunt init`
 
-The `init` task runs find & replace on the theme's `style.css` file. It replaces `Theme URI: http://underscores.me/` with whatever URL you save in the `betterUrl` constant. *If you're not using _s, nothing happens.*
+The `init` task runs find & replace on the theme's `style.scss` file. It replaces `Theme URI: http://underscores.me/` with whatever URL you save in the `betterUrl` constant. *If you're not using _s, nothing happens.*
 
 This command also inserts the `@import` directives for the Susy & Breakpoint Sass libraries. This is _s-dependent. If you use another theme, edit this section (lines 18-27) to find a string in your theme's primary `.scss` file and insert the imports there.
 
