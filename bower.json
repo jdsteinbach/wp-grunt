@@ -1,0 +1,24 @@
+{
+  "name": "tip",
+  "version": "0.0.1",
+  "authors": [
+    "James Steinbach"
+  ],
+  "description": "Custom bower config for TIP projects",
+  "keywords": [
+    "sass",
+    "susy"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "breakpoint-sass": "~2.5.0",
+    "susy": "~2.2.2"
+  }
+}
