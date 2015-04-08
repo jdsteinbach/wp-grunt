@@ -12,6 +12,7 @@ This Gruntfile assumes the following things:
 This Gruntfile doesn't care about:
 
 * Your local domain/url
+* How you plan to deploy (git, FTP, rsync: that's on you, nothing here for that)
 
 To start using this Gruntfile, navigate to your theme directory in Terminal and run the following commands:
 
