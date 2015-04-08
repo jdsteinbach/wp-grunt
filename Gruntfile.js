@@ -2,6 +2,7 @@
 
 module.exports = function(grunt) {
   grunt.initConfig({
+    betterUrl: 'http://yourdomain.com',
     pkg: grunt.file.readJSON('package.json'),
 
     replace: {
@@ -11,7 +12,7 @@ module.exports = function(grunt) {
           patterns: [
             {
               match: 'Theme URI: http://underscores.me/',
-              replacement: 'Theme URI: http://theideapeople.com'
+              replacement: 'Theme URI: <%= betterUrl %>'
             },
             {
               match: '@import "normalize";',
