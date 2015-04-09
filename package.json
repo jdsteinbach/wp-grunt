@@ -29,6 +29,7 @@
     "grunt-rev": "^0.1.0",
     "grunt-sass": "^0.18.0",
     "grunt-serve": "^0.1.6",
+    "grunt-shell": "^1.1.2",
     "grunt-svgmin": "^0.4.0",
     "grunt-usemin": "^2.3.0",
     "jshint-stylish": "^1.0.1",

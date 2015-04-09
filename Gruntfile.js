@@ -1,18 +1,84 @@
 'use strict';
 
+var themeName = 'Theme Name',
+    themeUri = 'http://themeuri.com',
+    author = 'Author Name',
+    authorUri = 'http://yourdomain.com',
+    themeSlug = 'tip-theme',
+    sanitizedSlug = themeSlug.replace(/[^a-z0-9_]+/ig,'_');
+
 module.exports = function(grunt) {
   grunt.initConfig({
-    betterUrl: 'http://yourdomain.com',
+    themeName: themeName,
+    themeUri: themeUri,
+    author: author,
+    authorUri: authorUri,
+    sanitizedSlug: sanitizedSlug,
     pkg: grunt.file.readJSON('package.json'),
 
+    shell: {
+      target: {
+        command: 'git clone https://github.com/Automattic/_s.git'
+      }
+    },
     replace: {
-      dist: {
+      slug: {
         options: {
           usePrefix: false,
           patterns: [
             {
+              match: '\`_s\'',
+              replacement: '\'<%= sanitizedSlug %>\''
+            },
+            {
+              match: 'tip_theme_',
+              replacement: '<%= sanitizedSlug %>_'
+            },
+            {
+              match: ' tip_theme',
+              replacement: ' <%= sanitizedSlug %>'
+            },
+            {
+              match: 'tip_theme-',
+              replacement: '<%= sanitizedSlug %>-'
+            }
+          ]
+        },
+        files: [
+          {
+            expand: true,
+            cwd: '.',
+            src: [
+              '*.*',
+              '{inc,js,languages,layouts}/**/*.*'
+            ],
+            dest: '.'
+          }
+        ]
+      },
+      scss: {
+        options: {
+          usePrefix: false,
+          patterns: [
+            {
+              match: 'Theme Name: tip_theme',
+              replacement: 'Theme Name: <%= themeName %>'
+            },
+            {
               match: 'Theme URI: http://underscores.me/',
-              replacement: 'Theme URI: <%= betterUrl %>'
+              replacement: 'Theme URI: <%= themeUri %>'
+            },
+            {
+              match: 'Author: Automattic',
+              replacement: 'Author: <%= author %>'
+            },
+            {
+              match: 'Author URI: http://automattic.com/',
+              replacement: 'Author URI: <%= authorUri %>'
+            },
+            {
+              match: 'Text Domain: tip_theme',
+              replacement: 'Text Domain: <%= sanitizedSlug %>'
             },
             {
               match: '@import "normalize";',
@@ -23,9 +89,8 @@ module.exports = function(grunt) {
         files: [
           {
             expand: true,
-            cwd: 'sass',
-            src: 'style.scss',
-            dest: 'sass'
+            cwd: '.',
+            src: ['style.*', 'sass/style.*']
           }
         ]
       }
@@ -144,11 +209,29 @@ module.exports = function(grunt) {
     },
 
     clean: {
-      main: ['deploy']
+      pre: ['_s'],
+      post: ['deploy']
+
     },
 
     copy: {
-      main: {
+      pre: {
+        files: [
+          {
+            expand: true,
+            cwd: '_s',
+            src: [
+              '**/*.*',
+              '!.{*}',
+              '!CONTRIBUTING.*',
+              '!codesniffer.*',
+              '!wpcom.*'
+            ],
+            dest: '.'
+          }
+        ]
+      },
+      post: {
         files: [
           {
             expand: true,
@@ -229,6 +312,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-imageoptim');
   grunt.loadNpmTasks('grunt-svgmin');
   grunt.loadNpmTasks('grunt-contrib-compress');
+  grunt.loadNpmTasks('grunt-shell');
 
   grunt.registerTask('serve', function (target) {
     grunt.task.run([
@@ -237,13 +321,19 @@ module.exports = function(grunt) {
   });
 
 
-  grunt.registerTask('init', ['replace']);
+  grunt.registerTask('init', [
+    'shell',
+    'copy:pre',
+    'clean:pre',
+    'replace:slug',
+    'replace:scss'
+  ]);
   grunt.registerTask('default', ['serve']);
   grunt.registerTask('build', [
     'sass:dist',
     'autoprefixer',
-    'clean',
-    'copy',
+    'clean:post',
+    'copy:post',
     'uglify',
     'csscomb',
     'cssmin',

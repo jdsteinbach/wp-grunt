@@ -7,7 +7,7 @@ Gruntfile for WP theme dev workflow
 This Gruntfile assumes the following things:
 
 * You've got WP running & attached to your local database
-* You're starting with the [_s blank theme](http://underscores.me)
+* You're going to use the [_s blank theme](http://underscores.me)
 
 This Gruntfile doesn't care about:
 
@@ -16,17 +16,33 @@ This Gruntfile doesn't care about:
 
 To start using this Gruntfile, navigate to your theme directory in Terminal and run the following commands:
 
-`npm install`
+```
+npm install
+bower install
+```
 
-`bower install`
+Once you've run those commands, edit the block of variables at the top of `Gruntfile.js`:
+
+```
+var themeName = 'Theme Name',
+    themeUri = 'http://themeuri.com',
+    author = 'Author Name',
+    authorUri = 'http://yourdomain.com',
+    themeSlug = 'tip-theme',
+    sanitizedSlug = themeSlug.replace(/[^a-z0-9_]+/ig,'_');
+```
+
+*Note: don't edit the `sanitizedSlug` value.*
+
+Once you've put your values for `themeName`, `themeUri`, `author`, `authorUri`, and `themeSlug`, proceed to the following tasks.
 
 ## Tasks
 
 ### `grunt init`
 
-The `init` task runs find & replace on the theme's `style.scss` file. It replaces `Theme URI: http://underscores.me/` with whatever URL you save in the `betterUrl` constant. *If you're not using _s, nothing happens.*
+Run this task once when you begin the project. The `init` task first clones the files from the _s theme into your working directory (this Gruntfile should be running in `wp-content/themes/your-theme-folder/`), and runs find & replace on the theme's Text Domain slug.
 
-This command also inserts the `@import` directives for the Susy & Breakpoint Sass libraries. This is _s-dependent. If you use another theme, edit this section (lines 18-27) to find a string in your theme's primary `.scss` file and insert the imports there.
+This command also inserts the `@import` directives for the Susy & Breakpoint Sass libraries. (The files for those libraries are already locally available after you ran `bower install`).
 
 ### `grunt watch`
 
