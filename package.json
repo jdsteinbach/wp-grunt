@@ -21,6 +21,7 @@
     "grunt-contrib-uglify": "^0.9.1",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-csscomb": "^3.0.0",
+    "grunt-curl": "^2.2.0",
     "grunt-imageoptim": "^1.4.1",
     "grunt-modernizr": "^0.5.2",
     "grunt-newer": "^0.7.0",

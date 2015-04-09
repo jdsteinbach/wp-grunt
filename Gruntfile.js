@@ -1,11 +1,14 @@
 'use strict';
 
-var themeName = 'The Idea People',
-    themeUri = 'http://theideapeople.com',
-    author = 'The Idea People',
-    authorUri = 'http://theideapeople.com',
-    themeSlug = 'tip-theme',
-    sanitizedSlug = themeSlug.replace(/[^a-z0-9_]+/ig,'_');
+var themeName = 'Theme Name',
+    themeUri = 'http://themeuri.com',
+    author = 'Author Name',
+    authorUri = 'http://yourdomain.com',
+    themeSlug = 'theme_slug',
+    themeColor = '000000',
+    sanitizedSlug = themeSlug.replace(/[^a-z0-9_]+/ig,'_'),
+    imageName = themeName.replace(/\s/gi,'+');
+
 
 module.exports = function(grunt) {
   grunt.initConfig({
@@ -14,12 +17,21 @@ module.exports = function(grunt) {
     author: author,
     authorUri: authorUri,
     sanitizedSlug: sanitizedSlug,
+    imageName: imageName,
+    themeColor: themeColor,
     themeDir: (__dirname.split('/').pop()),
     pkg: grunt.file.readJSON('package.json'),
 
     shell: {
       target: {
         command: 'git clone https://github.com/Automattic/_s.git'
+      }
+    },
+
+    curl: {
+      screenshot: {
+        src: 'http://placehold.it/1200x900/<%= themeColor %>/fff/&text=<%=  imageName %>',
+        dest: 'screenshot.png'
       }
     },
 
@@ -43,6 +55,10 @@ module.exports = function(grunt) {
             {
               match: '_s-',
               replacement: '<%= sanitizedSlug %>-'
+            },
+            {
+              match: 'initial-scale=1">',
+              replacement: 'initial-scale=1">\n<meta name="theme-color" value="#<%= themeColor %>">'
             }
           ]
         },
@@ -360,6 +376,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-svgmin');
   grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-shell');
+  grunt.loadNpmTasks('grunt-curl');
 
   grunt.registerTask('serve', function (target) {
     grunt.task.run(['watch']);
@@ -370,7 +387,8 @@ module.exports = function(grunt) {
     'copy:pre',
     'clean:pre',
     'replace:slug',
-    'replace:scss'
+    'replace:scss',
+    'curl:screenshot'
   ]);
   grunt.registerTask('default', ['serve']);
   grunt.registerTask('build', [
