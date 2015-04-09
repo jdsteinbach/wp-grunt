@@ -7,7 +7,7 @@ Gruntfile for WP theme dev workflow
 This Gruntfile assumes the following things:
 
 * You've got WP running & attached to your local database
-* You're going to use the [_s blank theme](http://underscores.me)
+* You want  to use the [_s blank theme](http://underscores.me)
 
 This Gruntfile doesn't care about:
 

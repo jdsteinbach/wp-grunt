@@ -27,7 +27,7 @@ module.exports = function(grunt) {
           usePrefix: false,
           patterns: [
             {
-              match: '\`_s\'',
+              match: '\'_s\'',
               replacement: '\'<%= sanitizedSlug %>\''
             },
             {
@@ -91,6 +91,28 @@ module.exports = function(grunt) {
             expand: true,
             cwd: '.',
             src: ['style.*', 'sass/style.*']
+          }
+        ]
+      },
+      footer: {
+        options: {
+          usePrefix: false,
+          patterns: [
+            {
+              match: 'Automattic',
+              replacement: '<%= author %>'
+            },
+            {
+              match: 'http://automattic.com/',
+              replacement: '<%= authorUri %>'
+            }
+          ]
+        },
+        files: [
+          {
+            expand: true,
+            cwd: '.',
+            src: 'footer.php'
           }
         ]
       }
@@ -209,7 +231,7 @@ module.exports = function(grunt) {
     },
 
     clean: {
-      pre: ['_s'],
+      pre: ['tip_theme'],
       post: ['deploy']
 
     },
@@ -219,7 +241,7 @@ module.exports = function(grunt) {
         files: [
           {
             expand: true,
-            cwd: '_s',
+            cwd: 'tip_theme',
             src: [
               '**/*.*',
               '!.{*}',
