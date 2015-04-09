@@ -1,9 +1,9 @@
 'use strict';
 
-var themeName = 'Theme Name',
-    themeUri = 'http://themeuri.com',
-    author = 'Author Name',
-    authorUri = 'http://yourdomain.com',
+var themeName = 'The Idea People',
+    themeUri = 'http://theideapeople.com',
+    author = 'The Idea People',
+    authorUri = 'http://theideapeople.com',
     themeSlug = 'tip-theme',
     sanitizedSlug = themeSlug.replace(/[^a-z0-9_]+/ig,'_');
 
@@ -58,7 +58,6 @@ module.exports = function(grunt) {
           }
         ]
       },
-
       scss: {
         options: {
           usePrefix: false,
@@ -84,6 +83,10 @@ module.exports = function(grunt) {
               replacement: 'Text Domain: <%= sanitizedSlug %>'
             },
             {
+              match: '/*\nTheme Name',
+              replacement: '/*!\nTheme Name'
+            },
+            {
               match: '@import "normalize";',
               replacement: '@import "normalize";\n@import "../bower_components/susy/sass/susy";\n@import "../bower_components/breakpoint-sass/stylesheets/breakpoint";'
             }
@@ -97,7 +100,6 @@ module.exports = function(grunt) {
           }
         ]
       },
-
       footer: {
         options: {
           usePrefix: false,
@@ -117,6 +119,25 @@ module.exports = function(grunt) {
             expand: true,
             cwd: '.',
             src: 'footer.php'
+          }
+        ]
+      },
+      cssMap: {
+        options: {
+          usePrefix: false,
+          patterns: [
+            {
+              match: /\/\*\#\ssourceMappingURL.+\*\//gi,
+              replacement: ''
+            }
+          ]
+        },
+        files: [
+          {
+            expand: true,
+            cwd: 'deploy/<%= themeDir %>',
+            src: 'style.css',
+            dest: 'deploy/<%= themeDir %>'
           }
         ]
       }
@@ -361,6 +382,7 @@ module.exports = function(grunt) {
     'csscomb',
     'cssmin',
     'imageoptim',
+    'replace:cssMap',
     'compress'
   ]);
 };
