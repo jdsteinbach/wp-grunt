@@ -29,14 +29,16 @@ Once you've run those commands, edit the block of variables at the top of `Grunt
 var themeName = 'Theme Name',
     themeUri = 'http://themeuri.com',
     author = 'Author Name',
-    authorUri = 'http://authoruri.com',
+    authorUri = 'http://yourdomain.com',
     themeSlug = 'theme_slug',
-    sanitizedSlug = themeSlug.replace(/[^a-z0-9_]+/ig,'_');
+    themeColor = '000000',
+    sanitizedSlug = themeSlug.replace(/[^a-z0-9_]+/ig,'_'),
+    imageName = themeName.replace(/\s/gi,'+');
 ```
 
-*Note: don't edit the `sanitizedSlug` value.*
+*Note: don't edit the `sanitizedSlug` or `imageName` values.*
 
-Once you've put your values for `themeName`, `themeUri`, `author`, `authorUri`, and `themeSlug`, proceed to the following tasks.
+Once you've set your values for `themeName`, `themeUri`, `author`, `authorUri`, `themeSlug`, and `themeColor`, proceed to the following tasks.
 
 ## Tasks
 
