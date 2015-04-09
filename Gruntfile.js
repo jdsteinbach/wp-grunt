@@ -14,6 +14,7 @@ module.exports = function(grunt) {
     author: author,
     authorUri: authorUri,
     sanitizedSlug: sanitizedSlug,
+    themeDir: (__dirname.split('/').pop()),
     pkg: grunt.file.readJSON('package.json'),
 
     shell: {
@@ -21,6 +22,7 @@ module.exports = function(grunt) {
         command: 'git clone https://github.com/Automattic/_s.git'
       }
     },
+
     replace: {
       slug: {
         options: {
@@ -31,15 +33,15 @@ module.exports = function(grunt) {
               replacement: '\'<%= sanitizedSlug %>\''
             },
             {
-              match: 'tip_theme_',
+              match: '_s_',
               replacement: '<%= sanitizedSlug %>_'
             },
             {
-              match: ' tip_theme',
+              match: ' _s',
               replacement: ' <%= sanitizedSlug %>'
             },
             {
-              match: 'tip_theme-',
+              match: '_s-',
               replacement: '<%= sanitizedSlug %>-'
             }
           ]
@@ -49,19 +51,20 @@ module.exports = function(grunt) {
             expand: true,
             cwd: '.',
             src: [
-              '*.*',
+              '*.{php,md,css}',
               '{inc,js,languages,layouts}/**/*.*'
             ],
             dest: '.'
           }
         ]
       },
+
       scss: {
         options: {
           usePrefix: false,
           patterns: [
             {
-              match: 'Theme Name: tip_theme',
+              match: 'Theme Name: _s',
               replacement: 'Theme Name: <%= themeName %>'
             },
             {
@@ -77,7 +80,7 @@ module.exports = function(grunt) {
               replacement: 'Author URI: <%= authorUri %>'
             },
             {
-              match: 'Text Domain: tip_theme',
+              match: 'Text Domain: _s',
               replacement: 'Text Domain: <%= sanitizedSlug %>'
             },
             {
@@ -94,6 +97,7 @@ module.exports = function(grunt) {
           }
         ]
       },
+
       footer: {
         options: {
           usePrefix: false,
@@ -127,11 +131,11 @@ module.exports = function(grunt) {
         },
         files: [
           {
-            expand: true, // Recursive
-            cwd: "sass", // The startup directory
-            src: ["**/style.scss"], // Source files
-            dest: ".", // Destination
-            ext: ".css" // File extension
+            expand: true,
+            cwd: 'sass',
+            src: ['**/style.scss'],
+            dest: '.',
+            ext: '.css'
           }
         ]
       },
@@ -143,11 +147,11 @@ module.exports = function(grunt) {
         },
         files: [
           {
-            expand: true, // Recursive
-            cwd: "sass", // The startup directory
-            src: ["**/style.scss"], // Source files
-            dest: ".", // Destination
-            ext: ".css" // File extension
+            expand: true,
+            cwd: 'sass',
+            src: ['**/style.scss'],
+            dest: '.',
+            ext: '.css'
           }
         ]
       }
@@ -158,16 +162,16 @@ module.exports = function(grunt) {
         browsers: [
           'last 3 versions'
         ],
-        map: true // Update source map (creates one if it can't find an existing map)
+        map: true
       },
       dist: {
         files: [
           {
-            expand: true, // Recursive
-            cwd: ".", // The startup directory
-            src: ["*.css"], // Source files
-            dest: ".", // Destination
-            ext: ".css" // File extension
+            expand: true,
+            cwd: '.',
+            src: ['*.css'],
+            dest: '.',
+            ext: '.css'
           }
         ]
       }
@@ -231,7 +235,7 @@ module.exports = function(grunt) {
     },
 
     clean: {
-      pre: ['tip_theme'],
+      pre: ['_s'],
       post: ['deploy']
 
     },
@@ -241,7 +245,7 @@ module.exports = function(grunt) {
         files: [
           {
             expand: true,
-            cwd: 'tip_theme',
+            cwd: '_s',
             src: [
               '**/*.*',
               '!.{*}',
@@ -266,7 +270,7 @@ module.exports = function(grunt) {
               '!{package,bower,csscomb}.json',
               '!Gruntfile.js'
             ],
-            dest: 'deploy/'+(__dirname.split('/').pop())
+            dest: 'deploy/<%= themeDir %>'
           }
         ]
       }
@@ -305,12 +309,12 @@ module.exports = function(grunt) {
     compress: {
       main: {
         options: {
-          archive: 'deploy/'+(__dirname.split('/').pop())+'.zip'
+          archive: 'deploy/<%= themeDir %>.zip'
         },
         files: [
           {
             expand: true,
-            cwd: 'deploy/'+(__dirname.split('/').pop()),
+            cwd: 'deploy/<%= themeDir %>',
             src: '**/*.*'
           }
         ]
@@ -337,11 +341,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-shell');
 
   grunt.registerTask('serve', function (target) {
-    grunt.task.run([
-      'watch'
-    ]);
+    grunt.task.run(['watch']);
   });
-
 
   grunt.registerTask('init', [
     'shell',
@@ -359,8 +360,7 @@ module.exports = function(grunt) {
     'uglify',
     'csscomb',
     'cssmin',
-    'imageoptim'
+    'imageoptim',
+    'compress'
   ]);
-
-
 };
