@@ -14,7 +14,7 @@ This Gruntfile doesn't care about:
 * Your local domain/url
 * How you plan to deploy (git, FTP, rsync: that's on you, nothing here for that)
 
-To start using this Gruntfile, navigate to your theme directory in Terminal and run the following commands. *(Replace `theme-name` with the name you want your theme folder to have.)*
+To start using this Gruntfile, navigate to your theme directory in Terminal and run the following commands. *(Replace `[repo url]` with the URL for this repo and `theme-name` with the name you want your theme folder to have.)*
 
 ```
 git clone [repo URL] theme-name
