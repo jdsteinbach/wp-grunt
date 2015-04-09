@@ -270,7 +270,7 @@ module.exports = function(grunt) {
             src: [
               '**/*.*',
               '!.{*}',
-              '!CONTRIBUTING.*',
+              '!*.md',
               '!codesniffer.*',
               '!wpcom.*'
             ],
