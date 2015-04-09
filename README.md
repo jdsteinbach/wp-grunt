@@ -46,7 +46,9 @@ Once you've set your values for `themeName`, `themeUri`, `author`, `authorUri`, 
 
 Run this task once when you begin the project. The `init` task first clones the files from the _s theme into your working directory (this Gruntfile should be running in `wp-content/themes/your-theme-folder/`), and runs find & replace on the theme's Text Domain slug.
 
-This command also inserts the `@import` directives for the Susy & Breakpoint Sass libraries. (The files for those libraries are already locally available after you ran `bower install`).
+The `init` task uses [placehold.it](http://placehold.it) to create `screenshot.png` based on the `themeName` and `themeColor` variables.
+
+This task also inserts the `@import` directives for the Susy & Breakpoint Sass libraries. (The files for those libraries are already locally available after you ran `bower install`).
 
 ### `grunt watch`
 
@@ -54,4 +56,4 @@ The `watch` task (also accessible through `grunt` and `grunt serve`) watches & c
 
 ### `grunt build`
 
-The `build` task creates a streamlined deployable version of the theme. In a folder called `deploy` (which it creates), it generates a copy of the theme (same folder name) containing only the necessary files needed for actual usage. All CSS & JS files are minified, images are optimized, and node/bower/Grunt/Sass stuff is left out. It also creates a `.zip` copy of the theme for easier upload / transfer.
+The `build` task creates a streamlined deployable version of the theme. In a folder called `deploy` (which it creates), this task generates a copy of the theme (same folder name) containing only the necessary files needed for the theme itself. All CSS & JS files are minified, images are optimized, and node/bower/Grunt/Sass files are left out. It also creates a `.zip` copy of the theme for easier upload / transfer.
