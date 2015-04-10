@@ -9,7 +9,6 @@ var themeName = 'Theme Name',
     sanitizedSlug = themeSlug.replace(/[^a-z0-9_]+/ig,'_'),
     imageName = themeName.replace(/\s/gi,'+');
 
-
 module.exports = function(grunt) {
   grunt.initConfig({
     themeName: themeName,
@@ -272,9 +271,8 @@ module.exports = function(grunt) {
     },
 
     clean: {
-      pre: ['_s'],
+      pre: ['_s','.git','.gitignore'],
       post: ['deploy']
-
     },
 
     copy: {
