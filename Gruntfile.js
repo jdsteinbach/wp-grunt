@@ -358,23 +358,22 @@ module.exports = function(grunt) {
   });
 
   // Load these required NPM tasks:
-  grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-autoprefixer');
-  grunt.loadNpmTasks('grunt-csscomb');
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-contrib-connect');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-replace');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-phplint');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-csscomb');
+  grunt.loadNpmTasks('grunt-curl');
   grunt.loadNpmTasks('grunt-imageoptim');
   grunt.loadNpmTasks('grunt-svgmin');
-  grunt.loadNpmTasks('grunt-contrib-compress');
+  grunt.loadNpmTasks('grunt-replace');
+  grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-shell');
-  grunt.loadNpmTasks('grunt-curl');
+  grunt.loadNpmTasks('grunt-svgmin');
 
   grunt.registerTask('serve', function (target) {
     grunt.task.run(['watch']);
@@ -398,6 +397,7 @@ module.exports = function(grunt) {
     'csscomb',
     'cssmin',
     'imageoptim',
+    'svgmin',
     'replace:cssMap',
     'compress'
   ]);
