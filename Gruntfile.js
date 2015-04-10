@@ -319,13 +319,14 @@ module.exports = function(grunt) {
     },
 
     svgmin: {
-      files: [
-        {
-          cwd: 'deploy',
-          src: '**/*.svg',
-          dest: 'deploy'
-        }
-      ]
+      dist: {
+        files: [
+          {
+            cwd: 'deploy',
+            src: '**/*.svg'
+          }
+        ]
+      }
     },
 
     uglify: {
