@@ -60,4 +60,4 @@ The `build` task creates a streamlined deployable version of the theme. In a fol
 
 ## Path Forward
 
-There are probably some dependencies in package.json that are never referenced, as well as some Grunt tasks that are poorly written. If you can optimize things like that, please file and issue or create a pull
+There are probably some dependencies in package.json that are never referenced, as well as some Grunt tasks that are poorly written. If you can optimize things like that, please file an issue or create a pull request.
