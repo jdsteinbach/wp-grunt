@@ -322,6 +322,7 @@ module.exports = function(grunt) {
       dist: {
         files: [
           {
+            expand: true,
             cwd: 'deploy',
             src: '**/*.svg'
           }
