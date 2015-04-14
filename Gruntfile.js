@@ -23,7 +23,10 @@ module.exports = function(grunt) {
 
     shell: {
       target: {
-        command: 'git clone https://github.com/Automattic/_s.git'
+        command: [
+          'git clone https://github.com/Automattic/_s.git',
+          'git clone git@hawk.tip.com:wordpress/boilerplate-sass.git'
+        ]
       }
     },
 
@@ -103,7 +106,7 @@ module.exports = function(grunt) {
             },
             {
               match: '@import "normalize";',
-              replacement: '@import "normalize";\n@import "../bower_components/susy/sass/susy";\n@import "../bower_components/breakpoint-sass/stylesheets/breakpoint";'
+              replacement: '@import "normalize";\n@import "boilerplate/boilerplate";\n@import "../bower_components/susy/sass/susy";\n@import "../bower_components/breakpoint-sass/stylesheets/breakpoint";\n'
             }
           ]
         },
@@ -271,7 +274,7 @@ module.exports = function(grunt) {
     },
 
     clean: {
-      pre: ['_s','.git','.gitignore'],
+      pre: ['_s','boilerplate-sass','.git','.gitignore'],
       post: ['deploy']
     },
 
@@ -289,6 +292,12 @@ module.exports = function(grunt) {
               '!wpcom.*'
             ],
             dest: '.'
+          },
+          {
+            expand: true,
+            cwd: 'boilerplate-sass',
+            src: '**/*.*',
+            dest: 'sass'
           }
         ]
       },
@@ -389,7 +398,10 @@ module.exports = function(grunt) {
     'replace:scss',
     'curl:screenshot'
   ]);
-  grunt.registerTask('default', ['serve']);
+  grunt.registerTask('default', [
+    'clean:post',
+    'serve'
+  ]);
   grunt.registerTask('build', [
     'sass:dist',
     'autoprefixer',
