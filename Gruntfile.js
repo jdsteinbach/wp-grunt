@@ -105,8 +105,8 @@ module.exports = function(grunt) {
               replacement: '/*!\nTheme Name'
             },
             {
-              match: '@import "normalize";',
-              replacement: '@import "normalize";\n@import "boilerplate/boilerplate";\n@import "../bower_components/susy/sass/susy";\n@import "../bower_components/breakpoint-sass/stylesheets/breakpoint";\n'
+              match: '@import "mixins/mixins-master";',
+              replacement: '@import "mixins/mixins-master";\n@import "boilerplate/boilerplate";\n@import "../bower_components/susy/sass/susy";\n@import "../bower_components/breakpoint-sass/stylesheets/breakpoint";\n'
             }
           ]
         },
