@@ -25,7 +25,7 @@ module.exports = function(grunt) {
       target: {
         command: [
           'git clone https://github.com/Automattic/_s.git',
-          'git clone git@hawk.tip.com:wordpress/boilerplate-sass.git'
+          'git clone https://github.com/jdsteinbach/boilerplate-sass.git'
         ].join('&&')
       }
     },
