@@ -17,6 +17,7 @@
     "grunt-csscomb": "^3.0.0",
     "grunt-curl": "^2.2.0",
     "grunt-imageoptim": "^1.4.1",
+    "grunt-notify": "^0.4.1",
     "grunt-replace": "^0.8.0",
     "grunt-sass": "^1.0.0",
     "grunt-shell": "^1.1.2",

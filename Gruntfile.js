@@ -385,6 +385,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-svgmin');
+  grunt.loadNpmTasks('grunt-notify');
 
   grunt.registerTask('serve', function (target) {
     grunt.task.run(['watch']);
