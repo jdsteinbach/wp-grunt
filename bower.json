@@ -1,10 +1,10 @@
 {
-  "name": "tip",
+  "name": "wp-grunt",
   "version": "0.0.1",
   "authors": [
     "James Steinbach"
   ],
-  "description": "Custom bower config for TIP projects",
+  "description": "Custom bower config for WP theme projects",
   "keywords": [
     "sass",
     "susy"
